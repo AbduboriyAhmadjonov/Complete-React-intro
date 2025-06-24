@@ -158,7 +158,7 @@ app.post("/api/order", async (req, res) => {
 });
 
 app.get("/api/past-orders", async (req, res) => {
-  await new Promise((r) => setTimeout(r, 5000));
+  // await new Promise((r) => setTimeout(r, 5000));
 
   try {
     const page = parseInt(req.query.page) || 1;
