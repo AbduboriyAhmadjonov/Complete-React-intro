@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import PizzaOfTheDay from "../PizzaOfTheDay";
 import Header from "../Header";
 import { CartContext } from "../contexts";
+import ErrorBoundary from "../ErrorBoundary";
 
 export const Route = createRootRoute({
   component: () => {
@@ -12,15 +13,17 @@ export const Route = createRootRoute({
 
     return (
       <>
-        <CartContext.Provider value={cartHoook}>
-          <div>
-            <Header />
-            <Outlet />
-            <PizzaOfTheDay />
-          </div>
-        </CartContext.Provider>
-        <TanStackRouterDevtools position="bottom-right" />
-        <ReactQueryDevtools />
+        <ErrorBoundary>
+          <CartContext.Provider value={cartHoook}>
+            <div>
+              <Header />
+              <Outlet />
+              <PizzaOfTheDay />
+            </div>
+          </CartContext.Provider>
+          <TanStackRouterDevtools position="bottom-right" />
+          <ReactQueryDevtools />
+        </ErrorBoundary>
       </>
     );
   },

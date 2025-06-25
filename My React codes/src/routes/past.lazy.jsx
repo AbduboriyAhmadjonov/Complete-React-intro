@@ -1,14 +1,23 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import getPastOrder from "../api/getPastOrder";
-import getPastOrders from "../api/getPastOrders";
-import Modal from "../Modal";
 import { priceConverter } from "../useCurrency";
+import getPastOrders from "../api/getPastOrders";
+import getPastOrder from "../api/getPastOrder";
+import ErrorBoundary from "../ErrorBoundary";
+import Modal from "../Modal";
 
 export const Route = createLazyFileRoute("/past")({
-  component: PastOrdersRoute,
+  component: ErrorBoundaryWrappedPastOrderRoutes,
 });
+
+function ErrorBoundaryWrappedPastOrderRoutes() {
+  return (
+    <ErrorBoundary>
+      <PastOrdersRoute />
+    </ErrorBoundary>
+  );
+}
 
 function PastOrdersRoute() {
   const [page, setPage] = useState(1);

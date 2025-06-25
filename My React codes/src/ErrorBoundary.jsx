@@ -1,23 +1,12 @@
 import { Component } from "react";
-import Link from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 
 class ErrorBoundary extends Component {
   state = { hasError: false };
-  constructor(props) {
-    super(props);
-  }
   static getDerivedStateFromError() {
     return { hasError: true };
   }
-  componentDidCatch(error, info) {
-    // You can log the error to an error reporting service (Sentry/TrackJS)
-    console.error("ErrorBoundary caught some error:", error, info);
-  }
-  componentDidMount() {
-    //
-  }
-  componentWillUnmount() {}
-  componentDidUpdate() {}
+
   render() {
     if (this.state.hasError) {
       return (
